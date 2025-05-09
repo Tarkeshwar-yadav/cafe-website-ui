@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Gather | Event Booking Cafe</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .wood-texture {
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            background-color: #f5f0e8;
+        }
+
+        .coffee-texture {
+            background-image: url('https://www.transparenttextures.com/patterns/coffee.png');
+            background-color: #f8f4ee;
+        }
+
+        .menu-item:hover .menu-img {
+            transform: scale(1.05);
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.03);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        .menu-img,
+        .gallery-img img,
+        .event-card {
+            transition: all 0.3s ease;
+        }
+
+        .bg-amber-50 {
+            background-color: #fffbeb;
+        }
+
+        .bg-amber-100 {
+            background-color: #fef3c7;
+        }
+
+        .bg-amber-700 {
+            background-color: #b45309;
+        }
+
+        .bg-amber-800 {
+            background-color: #92400e;
+        }
+
+        .bg-amber-900 {
+            background-color: #78350f;
+        }
+
+        .text-amber-700 {
+            color: #b45309;
+        }
+
+        .text-amber-800 {
+            color: #92400e;
+        }
+
+        .text-amber-900 {
+            color: #78350f;
+        }
+
+        .border-amber-500 {
+            border-color: #f59e0b;
+        }
+
+        .focus\:ring-amber-500:focus {
+            --tw-ring-color: #f59e0b;
+        }
+
+        .hover\:bg-amber-600:hover {
+            background-color: #d97706;
+        }
+
+        .hover\:bg-amber-700:hover {
+            background-color: #b45309;
+        }
+
+        .hover\:text-amber-700:hover {
+            color: #b45309;
+        }
+
+        .hover\:text-amber-800:hover {
+            color: #92400e;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand fw-bold fs-4 text-dark" href="#">Brew & Gather</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link text-dark" href="#home">Home</a></li>
+              <li class="nav-item"><a class="nav-link text-secondary" href="navbar-list/about.html">About</a></li>
+              <li class="nav-item"><a class="nav-link text-secondary" href="navbar-list/event.html">Events</a></li>
+              <li class="nav-item"><a class="nav-link text-secondary" href="navbar-list/menu.html">Menu</a></li>
+              <li class="nav-item"><a class="nav-link text-secondary" href="navbar-list/gallery.html">Gallery</a></li>
+              <li class="nav-item"><a class="nav-link text-secondary" href="navbar-list/contact.html">Contact</a></li>
+              <li class="nav-item ms-2">
+                <a class="btn btn-dark rounded-pill px-4 py-2" href="#book">Book Now</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  
+    <!-- Hero Section -->
+    <section id="home"
+        class="hero-bg min-vh-100 d-flex align-items-center justify-content-center text-center text-white pt-5">
+        <div class="container px-4 fade-in">
+            <h1 class="display-4 fw-bold mb-4">Book Moments That Matter</h1>
+            <p class="lead mb-5">A cozy haven where coffee meets community. Reserve your spot for unforgettable
+                gatherings.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#book"
+                    class="btn bg-amber-700 hover-bg-amber-600 text-white px-5 py-3 rounded-pill fw-medium">Reserve a
+                    Spot</a>
+                <a href="#events" class="btn btn-outline-light border-2 px-5 py-3 rounded-pill fw-medium">View
+                    Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 wood-texture">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-amber-900 mb-3">Our Story</h2>
+                <div class="w-25 mx-auto border-top border-3 border-amber-700"></div>
+            </div>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                        alt="Cafe interior" class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="fw-bold text-amber-900 mb-4">Where Coffee & Community Blend Perfectly</h3>
+                    <p class="text-muted mb-4">Founded in 2015, Brew & Gather began as a small coffee shop with a big
+                        dream - to create a space where people could connect over exceptional coffee in a warm, inviting
+                        atmosphere.</p>
+                    <p class="text-muted mb-4">Today, we've grown into a beloved community hub where locals and visitors
+                        alike gather for our carefully crafted beverages, delicious food, and vibrant events that bring
+                        people together.</p>
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-6">
+                            <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+                                <div class="text-amber-700 fs-3 mb-3">
+                                    <i class="fas fa-coffee"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">Artisan Coffee</h4>
+                                <p class="text-muted small">Ethically sourced beans roasted to perfection</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-white p-4 rounded-3 shadow-sm h-100">
+                                <div class="text-amber-700 fs-3 mb-3">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">Events Space</h4>
+                                <p class="text-muted small">Perfect setting for gatherings of all kinds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-5 coffee-texture">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-amber-900 mb-3">Upcoming Events</h2>
+                <div class="w-25 mx-auto border-top border-3 border-amber-700"></div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="d-flex justify-content-center mb-5">
+                <div class="btn-group" role="group" id="filterTabs">
+                    <button data-filter="all" class="btn bg-amber-700 text-white rounded-start">
+                        All Events
+                    </button>
+                    <button data-filter="music" class="btn bg-white text-gray-700">
+                        Music Nights
+                    </button>
+                    <button data-filter="workshop" class="btn bg-white text-gray-700">
+                        Workshops
+                    </button>
+                    <button data-filter="poetry" class="btn bg-white text-gray-700">
+                        Poetry
+                    </button>
+                    <button data-filter="book" class="btn bg-white text-gray-700 rounded-end">
+                        Book Clubs
+                    </button>
+                </div>
+            </div>
+
+            <!-- Event Cards -->
+            <div class="row g-4" id="eventCards">
+                <!-- Event Card 1: Music -->
+                <div class="col-md-6 col-lg-4 event-card" data-category="music">
+                    <div class="card h-100 border-0 shadow-sm transition">
+                        <div class="position-relative" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1470&q=80"
+                                class="card-img-top h-100 w-100 object-cover" alt="Jazz Night">
+                            <div
+                                class="position-absolute top-0 end-0 bg-amber-700 text-white px-3 py-1 rounded-pill small fw-bold m-2">
+                                Music Night
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="far fa-calendar-alt me-2"></i><span>June 15, 2023</span>
+                                <span class="mx-2">•</span><i class="far fa-clock me-2"></i><span>7:00 PM</span>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3">Smooth Jazz Evening</h3>
+                            <p class="card-text text-muted mb-4">Enjoy an evening of smooth jazz with local talents in
+                                our intimate cafe setting.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-amber-700 fw-bold">$15</span>
+                                <button class="btn btn-sm bg-amber-700 text-white rounded-pill px-3">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 2: Poetry -->
+                <div class="col-md-6 col-lg-4 event-card" data-category="poetry">
+                    <div class="card h-100 border-0 shadow-sm transition">
+                        <div class="position-relative" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1374&q=80"
+                                class="card-img-top h-100 w-100 object-cover" alt="Poetry Reading">
+                            <div
+                                class="position-absolute top-0 end-0 bg-amber-700 text-white px-3 py-1 rounded-pill small fw-bold m-2">
+                                Poetry Slam
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="far fa-calendar-alt me-2"></i><span>June 18, 2023</span>
+                                <span class="mx-2">•</span><i class="far fa-clock me-2"></i><span>6:30 PM</span>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3">Open Mic Poetry Night</h3>
+                            <p class="card-text text-muted mb-4">Share your words or enjoy performances at our monthly
+                                poetry slam. All voices welcome!</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-amber-700 fw-bold">Free</span>
+                                <button class="btn btn-sm bg-amber-700 text-white rounded-pill px-3">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 3: Workshop -->
+                <div class="col-md-6 col-lg-4 event-card" data-category="workshop">
+                    <div class="card h-100 border-0 shadow-sm transition">
+                        <div class="position-relative" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80"
+                                class="card-img-top h-100 w-100 object-cover" alt="Latte Art Workshop">
+                            <div
+                                class="position-absolute top-0 end-0 bg-amber-700 text-white px-3 py-1 rounded-pill small fw-bold m-2">
+                                Workshop
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="far fa-calendar-alt me-2"></i><span>June 22, 2023</span>
+                                <span class="mx-2">•</span><i class="far fa-clock me-2"></i><span>10:00 AM</span>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3">Latte Art Workshop</h3>
+                            <p class="card-text text-muted mb-4">Learn the secrets of beautiful latte art from our
+                                master barista. Includes materials.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-amber-700 fw-bold">$45</span>
+                                <button class="btn btn-sm bg-amber-700 text-white rounded-pill px-3">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#" class="text-amber-700 fw-medium text-decoration-none">
+                    View All Events
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="book" class="py-5 bg-amber-50">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-amber-900 mb-3">Book Your Event</h2>
+                <div class="w-25 mx-auto border-top border-3 border-amber-700"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="bg-white rounded-3 shadow p-4 p-md-5">
+                        <form>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" id="name" class="form-control py-3" placeholder="Your name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" class="form-control py-3"
+                                        placeholder="your@email.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" id="phone" class="form-control py-3" placeholder="(123) 456-7890">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="event-type" class="form-label">Event Type</label>
+                                    <select id="event-type" class="form-select py-3">
+                                        <option value="">Select an event type</option>
+                                        <option value="private">Private Gathering</option>
+                                        <option value="workshop">Workshop/Class</option>
+                                        <option value="meeting">Business Meeting</option>
+                                        <option value="celebration">Celebration</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label">Preferred Date</label>
+                                    <input type="date" id="date" class="form-control py-3">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="time" class="form-label">Preferred Time</label>
+                                    <input type="time" id="time" class="form-control py-3">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="guests" class="form-label">Number of Guests</label>
+                                    <input type="number" id="guests" min="1" class="form-control py-3" placeholder="10">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="special-requests" class="form-label">Special Requests</label>
+                                    <textarea id="special-requests" rows="1" class="form-control py-3"
+                                        placeholder="Dietary restrictions, setup needs, etc."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <button type="submit" class="btn bg-amber-700 text-white w-100 py-3 fw-bold">
+                                    Submit Booking Request
+                                </button>
+                            </div>
+
+                            <p class="text-center text-muted mt-4">
+                                We'll contact you within 24 hours to confirm your booking details.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5 wood-texture">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-amber-900 mb-3">Our Menu</h2>
+                <div class="w-25 mx-auto border-top border-3 border-amber-700"></div>
+            </div>
+
+            <div class="d-flex justify-content-center mb-5">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn bg-amber-700 text-white rounded-start">
+                        All Items
+                    </button>
+                    <button type="button" class="btn bg-white text-gray-700">
+                        Coffee
+                    </button>
+                    <button type="button" class="btn bg-white text-gray-700">
+                        Tea
+                    </button>
+                    <button type="button" class="btn bg-white text-gray-700">
+                        Breakfast
+                    </button>
+                    <button type="button" class="btn bg-white text-gray-700 rounded-end">
+                        Pastries
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Menu Item 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm menu-item">
+                        <div class="position-relative overflow-hidden" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                                class="card-img-top w-100 h-100 object-cover menu-img" alt="Espresso">
+                            <div
+                                class="position-absolute top-0 start-0 bg-white text-amber-700 px-3 py-1 rounded-pill small fw-bold m-3">
+                                Popular
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="h5 fw-bold mb-0">Espresso</h3>
+                                <span class="text-amber-700 fw-bold">$3.50</span>
+                            </div>
+                            <p class="card-text text-muted small mb-3">Our signature single-origin espresso with rich
+                                crema</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-amber-100 text-amber-800">Strong</span>
+                                <span class="badge bg-amber-100 text-amber-800">Small</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm menu-item">
+                        <div class="position-relative overflow-hidden" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                class="card-img-top w-100 h-100 object-cover menu-img" alt="Avocado Toast">
+                            <div
+                                class="position-absolute top-0 start-0 bg-white text-amber-700 px-3 py-1 rounded-pill small fw-bold m-3">
+                                Vegan
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="h5 fw-bold mb-0">Avocado Toast</h3>
+                                <span class="text-amber-700 fw-bold">$9.50</span>
+                            </div>
+                            <p class="card-text text-muted small mb-3">Sourdough bread with smashed avocado, cherry
+                                tomatoes, and microgreens</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-amber-100 text-amber-800">Vegetarian</span>
+                                <span class="badge bg-amber-100 text-amber-800">Gluten-Free Option</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm menu-item">
+                        <div class="position-relative overflow-hidden" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1560717843-60cb3e8a1ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                class="card-img-top w-100 h-100 object-cover menu-img" alt="Chai Latte">
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="h5 fw-bold mb-0">Spiced Chai Latte</h3>
+                                <span class="text-amber-700 fw-bold">$5.00</span>
+                            </div>
+                            <p class="card-text text-muted small mb-3">House-made chai blend with steamed milk and a
+                                dash of cinnamon</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-amber-100 text-amber-800">Dairy-Free Option</span>
+                                <span class="badge bg-amber-100 text-amber-800">Spiced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm menu-item">
+                        <div class="position-relative overflow-hidden" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                                class="card-img-top w-100 h-100 object-cover menu-img" alt="Croissant">
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="h5 fw-bold mb-0">Almond Croissant</h3>
+                                <span class="text-amber-700 fw-bold">$4.50</span>
+                            </div>
+                            <p class="card-text text-muted small mb-3">Buttery croissant filled with almond cream and
+                                topped with sliced almonds</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-amber-100 text-amber-800">Fresh Baked</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm menu-item">
+                        <div class="position-relative overflow-hidden" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                class="card-img-top w-100 h-100 object-cover menu-img" alt="Cold Brew">
+                            <div
+                                class="position-absolute top-0 start-0 bg-white text-amber-700 px-3 py-1 rounded-pill small fw-bold m-3">
+                                Seasonal
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="h5 fw-bold mb-0">Nitro Cold Brew</h3>
+                                <span class="text-amber-700 fw-bold">$5.50</span>
+                            </div>
+                            <p class="card-text text-muted small mb-3">Smooth, creamy nitro-infused cold brew with a
+                                velvety texture</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-amber-100 text-amber-800">Cold</span>
+                                <span class="badge bg-amber-100 text-amber-800">Creamy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm menu-item">
+                        <div class="position-relative overflow-hidden" style="height: 200px;">
+                            <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                class="card-img-top w-100 h-100 object-cover menu-img" alt="Breakfast Bowl">
+                            <div
+                                class="position-absolute top-0 start-0 bg-white text-amber-700 px-3 py-1 rounded-pill small fw-bold m-3">
+                                Healthy
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h3 class="h5 fw-bold mb-0">Acai Bowl</h3>
+                                <span class="text-amber-700 fw-bold">$10.50</span>
+                            </div>
+                            <p class="card-text text-muted small mb-3">Acai blend topped with granola, banana, berries,
+                                and coconut</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-amber-100 text-amber-800">Vegan</span>
+                                <span class="badge bg-amber-100 text-amber-800">Gluten-Free Option</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#" class="text-amber-700 fw-medium text-decoration-none">
+                    View Full Menu
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+   <!-- Gallery Section -->
+<section id="gallery" class="py-5 coffee-texture">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-amber-900 mb-3">Our Gallery</h2>
+            <div class="w-25 mx-auto border-top border-3 border-amber-700"></div>
+        </div>
+        
+        <div class="row g-3">
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Cafe interior" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Coffee cup" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Cafe seating" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92f768e2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Coffee beans" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Espresso" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Latte art" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Cold brew" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="overflow-hidden rounded-3 shadow-sm cursor-pointer gallery-img">
+                    <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         class="img-fluid w-100 h-100 object-cover" 
+                         style="height: 200px;" 
+                         alt="Live music" 
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="">
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-warning bg-opacity-25">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">What People Say</h2>
+        <div class="border-bottom border-warning border-3 mx-auto" style="width: 100px;"></div>
+      </div>
+      
+      <div class="row g-4">
+        <!-- Testimonial 1 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <span class="text-warning fs-5">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </span>
+              </div>
+              <p class="text-secondary mb-4">"The perfect spot for our book club meetings. The ambiance is cozy, the coffee is exceptional, and the staff goes above and beyond to make our gatherings special."</p>
+              <div class="d-flex align-items-center">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah J." class="rounded-circle me-3" width="48" height="48">
+                <div>
+                  <h5 class="fw-bold mb-0">Sarah J.</h5>
+                  <small class="text-muted">Book Club Organizer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <span class="text-warning fs-5">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </span>
+              </div>
+              <p class="text-secondary mb-4">"Hosted my birthday here and it was magical! The staff helped with setup, the food was delicious, and the space had just the right vibe. Can't wait for my next event!"</p>
+              <div class="d-flex align-items-center">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T." class="rounded-circle me-3" width="48" height="48">
+                <div>
+                  <h5 class="fw-bold mb-0">Michael T.</h5>
+                  <small class="text-muted">Regular Customer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <span class="text-warning fs-5">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </span>
+              </div>
+              <p class="text-secondary mb-4">"As a remote worker, I appreciate the great WiFi and work-friendly atmosphere. The latte art workshop was also a highlight - learned so much from their talented baristas!"</p>
+              <div class="d-flex align-items-center">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K." class="rounded-circle me-3" width="48" height="48">
+                <div>
+                  <h5 class="fw-bold mb-0">Priya K.</h5>
+                  <small class="text-muted">Digital Nomad</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Contact Section -->
+<section id="contact" class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold text-dark mb-3">Visit Us</h2>
+        <div class="border-bottom border-warning border-3 mx-auto" style="width: 100px;"></div>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card h-100 border-0 shadow-sm rounded-4 bg-warning bg-opacity-10">
+            <div class="card-body p-4 p-lg-5">
+              <h3 class="fs-2 fw-bold text-dark mb-4">Get In Touch</h3>
+              
+              <div class="d-flex flex-column gap-4">
+                <div class="d-flex">
+                  <div class="text-warning fs-4 me-3 mt-1">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div>
+                    <h4 class="fw-bold mb-1">Address</h4>
+                    <p class="text-secondary">123 Coffee Lane, Brewville, CA 90210</p>
+                  </div>
+                </div>
+                
+                <div class="d-flex">
+                  <div class="text-warning fs-4 me-3 mt-1">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <div>
+                    <h4 class="fw-bold mb-1">Phone</h4>
+                    <p class="text-secondary">(555) 123-4567</p>
+                  </div>
+                </div>
+                
+                <div class="d-flex">
+                  <div class="text-warning fs-4 me-3 mt-1">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div>
+                    <h4 class="fw-bold mb-1">Email</h4>
+                    <p class="text-secondary">hello@brewandgather.com</p>
+                  </div>
+                </div>
+                
+                <div class="d-flex">
+                  <div class="text-warning fs-4 me-3 mt-1">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div>
+                    <h4 class="fw-bold mb-1">Hours</h4>
+                    <p class="text-secondary mb-1">Monday - Friday: 7am - 9pm</p>
+                    <p class="text-secondary">Saturday - Sunday: 8am - 10pm</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-5">
+                <h4 class="fw-bold mb-3">Follow Us</h4>
+                <div class="d-flex gap-3">
+                  <a href="#" class="btn btn-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="#" class="btn btn-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" class="btn btn-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#" class="btn btn-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="fab fa-tiktok"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="card h-100 border-0 shadow-sm rounded-4 bg-warning bg-opacity-10">
+            <div class="card-body p-4 p-lg-5">
+              <h3 class="fs-2 fw-bold text-dark mb-4">Send Us a Message</h3>
+              <form>
+                <div class="mb-3">
+                  <label for="contact-name" class="form-label">Name</label>
+                  <input type="text" class="form-control form-control-lg" id="contact-name" placeholder="Your name">
+                </div>
+                <div class="mb-3">
+                  <label for="contact-email" class="form-label">Email</label>
+                  <input type="email" class="form-control form-control-lg" id="contact-email" placeholder="your@email.com">
+                </div>
+                <div class="mb-3">
+                  <label for="contact-subject" class="form-label">Subject</label>
+                  <input type="text" class="form-control form-control-lg" id="contact-subject" placeholder="Subject">
+                </div>
+                <div class="mb-4">
+                  <label for="contact-message" class="form-label">Message</label>
+                  <textarea class="form-control form-control-lg" id="contact-message" rows="4" placeholder="Your message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-warning text-white fw-bold w-100 py-3">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-5 rounded-4 overflow-hidden shadow-lg">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215256012345!2d-73.98784468459372!3d40.74844097932799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzU0LjQiTiA3M8KwNTknMTEuNyJX!5e0!3m2!1sen!2sus!4v1623251234567!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+<footer class="bg-dark text-white py-5">
+    <div class="container py-3">
+      <div class="row gy-4 mb-5">
+        <div class="col-md-6 col-lg-3">
+          <h3 class="fs-4 fw-bold mb-3">Brew & Gather</h3>
+          <p class="text-light mb-4">Where every cup tells a story and every gathering creates memories.</p>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-warning-emphasis text-decoration-none">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-warning-emphasis text-decoration-none">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-warning-emphasis text-decoration-none">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-warning-emphasis text-decoration-none">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <h4 class="fs-5 fw-bold mb-3">Quick Links</h4>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#home" class="nav-link p-0 text-light">Home</a></li>
+            <li class="nav-item mb-2"><a href="#about" class="nav-link p-0 text-light">About</a></li>
+            <li class="nav-item mb-2"><a href="#events" class="nav-link p-0 text-light">Events</a></li>
+            <li class="nav-item mb-2"><a href="#menu" class="nav-link p-0 text-light">Menu</a></li>
+            <li class="nav-item mb-2"><a href="#gallery" class="nav-link p-0 text-light">Gallery</a></li>
+            <li class="nav-item mb-2"><a href="#contact" class="nav-link p-0 text-light">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <h4 class="fs-5 fw-bold mb-3">Opening Hours</h4>
+          <ul class="list-unstyled text-light">
+            <li class="mb-2">Monday - Friday: 7am - 9pm</li>
+            <li class="mb-2">Saturday: 8am - 10pm</li>
+            <li class="mb-2">Sunday: 8am - 10pm</li>
+            <li class="mt-3">Special events may have different hours</li>
+          </ul>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <h4 class="fs-5 fw-bold mb-3">Newsletter</h4>
+          <p class="text-light mb-3">Subscribe to get updates on events, specials, and more.</p>
+          <form class="d-flex">
+            <input type="email" class="form-control" placeholder="Your email">
+            <button type="submit" class="btn btn-warning ms-1 px-3">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-top border-secondary pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="text-light mb-3 mb-md-0">© 2023 Brew & Gather. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="#" class="text-light text-decoration-none">Privacy Policy</a>
+          <a href="#" class="text-light text-decoration-none">Terms of Service</a>
+          <a href="#" class="text-light text-decoration-none">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+  
+
+    // Lightbox functionality
+    function openLightbox(imgSrc) {
+        document.getElementById('lightbox').style.display = 'flex';
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close lightbox when clicking outside the image
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeLightbox();
+        }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Close mobile menu if open
+            if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        });
+    });
+
+
+    // event section tabs 
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.event-card');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active style
+            buttons.forEach(b => b.classList.remove('bg-amber-700', 'text-white'));
+            buttons.forEach(b => b.classList.add('bg-white', 'text-gray-700'));
+            btn.classList.add('bg-amber-700', 'text-white');
+            btn.classList.remove('bg-white', 'text-gray-700');
+
+            const filter = btn.getAttribute('data-filter');
+            cards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Add fade-in animation when scrolling
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+        for (let i = 0; i < fadeElements.length; i++) {
+            const elem = fadeElements[i];
+            const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
+            if (distInView < 0) {
+                elem.classList.add('fade-in');
+            }
+        }
+    };
+    
+    window.addEventListener('scroll', fadeInOnScroll);
+    fadeInOnScroll();
+</script>
+
+
+
+
+</body>
+</html>

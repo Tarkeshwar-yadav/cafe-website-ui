@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | The Roasted Bean</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFDFA;
+        }
+        
+        .gallery-item {
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 90, 43, 0.15);
+        }
+        
+        .gallery-img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(139, 90, 43, 0.7);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background-color: #8B5A2B;
+            color: white;
+        }
+        
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="text-gray-700">
+    <!-- Navigation -->
+    <nav class="bg-amber-900 text-amber-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-mug-hot text-2xl text-amber-200"></i>
+                <span class="text-xl font-semibold">The Roasted Bean</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="about.html" class="hover:text-amber-200 transition">About</a>
+                <a href="gallery.html" class="text-amber-200 font-medium">Gallery</a>
+                <a href="contact.html" class="hover:text-amber-200 transition">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="md:hidden bg-amber-800 text-amber-50 hidden" id="mobileMenu">
+        <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+            <a href="index.html" class="py-2 hover:text-amber-200 transition">Home</a>
+            <a href="about.html" class="py-2 hover:text-amber-200 transition">About</a>
+            <a href="gallery.html" class="py-2 text-amber-200 font-medium">Gallery</a>
+            <a href="contact.html" class="py-2 hover:text-amber-200 transition">Contact</a>
+        </div>
+    </div>
+
+    <!-- Gallery Hero Section -->
+    <section class="py-16 bg-amber-50">
+        <div class="container mx-auto px-4 text-center animate-fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold text-amber-900 mb-4">Visual Stories</h1>
+            <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore snapshots of our coffee journey, from bean to cup</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filters -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-3 animate-fade-in delay-100">
+                <button class="filter-btn active px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white" data-filter="all">
+                    All
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white" data-filter="coffee">
+                    Coffee
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white" data-filter="shop">
+                    Our Shop
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white" data-filter="people">
+                    People
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white" data-filter="events">
+                    Events
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-12 bg-amber-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Item 1 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-100" data-category="coffee">
+                    <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                         alt="Coffee beans close-up" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Arabica Selection</h3>
+                        <p>Our premium beans from Ethiopia</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-200" data-category="shop">
+                    <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                         alt="Coffee shop interior" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Our Space</h3>
+                        <p>Where community gathers</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-300" data-category="people">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                         alt="Barista making coffee" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Craftsmanship</h3>
+                        <p>Precision in every cup</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-100" data-category="coffee">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f839b4c1e309?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                         alt="Latte art heart" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Latte Art</h3>
+                        <p>Made with love</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-200" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1461023058949-07a2f80ed42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Coffee tasting event" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Tasting Night</h3>
+                        <p>Exploring new flavors</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-300" data-category="shop">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Coffee shop counter" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Morning Shift</h3>
+                        <p>Ready to serve</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 7 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-100" data-category="people">
+                    <img src="https://images.unsplash.com/photo-1485118577989-0f09e5002458?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                         alt="Friends enjoying coffee" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Coffee & Friends</h3>
+                        <p>The perfect combination</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 8 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-200" data-category="coffee">
+                    <img src="https://images.unsplash.com/photo-1517701550928-30f1e1b3d0a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                         alt="Coffee brewing process" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Brewing Magic</h3>
+                        <p>Chemex in action</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Item 9 -->
+                <div class="gallery-item rounded-xl overflow-hidden relative animate-fade-in delay-300" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92f768e2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Coffee workshop" 
+                         class="w-full h-64 md:h-80 object-cover gallery-img">
+                    <div class="gallery-overlay">
+                        <h3 class="text-xl font-bold mb-2">Brewing Workshop</h3>
+                        <p>Sharing our knowledge</p>
+                        <i class="fas fa-search-plus mt-4 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-12 animate-fade-in">
+                <button id="loadMore" class="bg-amber-800 hover:bg-amber-900 text-white px-8 py-3 rounded-full font-medium transition">
+                    Load More <i class="fas fa-plus ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal (hidden by default) -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
+        <div class="relative max-w-4xl w-full p-4">
+            <button id="closeLightbox" class="absolute top-4 right-4 text-white text-3xl z-50">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex items-center justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 px-4 z-40">
+                <button id="prevBtn" class="bg-amber-800 hover:bg-amber-900 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextBtn" class="bg-amber-800 hover:bg-amber-900 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <img id="lightboxImg" src="" alt="" class="w-full max-h-screen object-contain">
+            <div id="lightboxCaption" class="text-white text-center mt-4 text-lg"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-amber-900 text-amber-100 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-amber-200">The Roasted Bean</h3>
+                    <p class="mb-4">Where every cup tells a story.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-amber-300">Home</a></li>
+                        <li><a href="about.html" class="hover:text-amber-300">About</a></li>
+                        <li><a href="gallery.html" class="hover:text-amber-300">Gallery</a></li>
+                        <li><a href="contact.html" class="hover:text-amber-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Hours</h4>
+                    <ul class="space-y-2">
+                        <li>Monday - Friday: 7am - 7pm</li>
+                        <li>Saturday: 8am - 8pm</li>
+                        <li>Sunday: 8am - 6pm</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Contact</h4>
+                    <address class="not-italic">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> 123 Coffee Lane, City</p>
+                        <p class="my-2"><i class="fas fa-phone mr-2"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope mr-2"></i> hello@roastedbean.com</p>
+                    </address>
+                </div>
+            </div>
+            <div class="border-t border-amber-800 mt-8 pt-8 text-center">
+                <p>&copy; 2023 The Roasted Bean. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('button').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Gallery filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter items
+                const filter = button.dataset.filter;
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const closeLightbox = document.getElementById('closeLightbox');
+        const galleryImages = document.querySelectorAll('.gallery-img');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentImageIndex = 0;
+        const images = Array.from(galleryImages).map(img => ({
+            src: img.src,
+            alt: img.alt,
+            caption: img.parentElement.querySelector('.gallery-overlay h3').textContent + 
+                    ' - ' + 
+                    img.parentElement.querySelector('.gallery-overlay p').textContent
+        }));
+        
+        // Open lightbox
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentImageIndex = index;
+                updateLightbox();
+                lightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close lightbox
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Navigation
+        prevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateLightbox();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateLightbox();
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'ArrowLeft') {
+                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                    updateLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    updateLightbox();
+                } else if (e.key === 'Escape') {
+                    lightbox.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+        
+        function updateLightbox() {
+            lightboxImg.src = images[currentImageIndex].src;
+            lightboxImg.alt = images[currentImageIndex].alt;
+            lightboxCaption.textContent = images[currentImageIndex].caption;
+        }
+        
+        // Load more functionality (simulated)
+        const loadMoreBtn = document.getElementById('loadMore');
+        let loadedItems = 9; // Initial count
+        
+        loadMoreBtn.addEventListener('click', () => {
+            // In a real implementation, you would fetch more items from a server
+            // Here we'll just simulate by showing a message
+            loadMoreBtn.textContent = 'All photos loaded';
+            loadMoreBtn.classList.add('opacity-50');
+            loadMoreBtn.disabled = true;
+        });
+        
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        };
+
+        // Run once on page load
+        animateOnScroll();
+        
+        // Run on scroll
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

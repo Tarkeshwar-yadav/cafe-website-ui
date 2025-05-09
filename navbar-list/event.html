@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brew Haven - Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiNlZGVkZWQiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=');
+        }
+        
+        .coffee-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8B5A2B, transparent);
+            position: relative;
+        }
+        
+        .coffee-divider::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%238B5A2B"><path d="M18 6h-2V4h2v2zm0 4h-2V8h2v2zm0 4h-2v-2h2v2zm-6-8h-2V4h2v2zm0 4h-2V8h2v2zm0 4h-2v-2h2v2zm-6-8H4V4h2v2zm0 4H4V8h2v2zm0 4H4v-2h2v2z"/></svg>');
+            background-repeat: no-repeat;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .event-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(to bottom, #FFF8F0 0%, #FFFFFF 100%);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 90, 43, 0.15);
+        }
+        
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 2;
+        }
+        
+        .filter-btn.active {
+            background-color: #8B5A2B;
+            color: white;
+        }
+        
+        .book-now-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .book-now-btn:hover {
+            background-color: #6D4C3D;
+        }
+        
+        .view-all-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .view-all-btn:hover {
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 640px) {
+            .filter-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-amber-900 text-amber-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-mug-hot text-2xl text-amber-200"></i>
+                <span class="text-xl font-semibold">The Brew Haven</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="menu.html" class="hover:text-amber-200 transition">Menu</a>
+                <a href="events.html" class="text-amber-200 font-medium">Events</a>
+                <a href="gallery.html" class="hover:text-amber-200 transition">Gallery</a>
+                <a href="contact.html" class="hover:text-amber-200 transition">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="md:hidden bg-amber-800 text-amber-50 hidden" id="mobileMenu">
+        <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+            <a href="index.html" class="py-2 hover:text-amber-200 transition">Home</a>
+            <a href="menu.html" class="py-2 hover:text-amber-200 transition">Menu</a>
+            <a href="events.html" class="py-2 text-amber-200 font-medium">Events</a>
+            <a href="gallery.html" class="py-2 hover:text-amber-200 transition">Gallery</a>
+            <a href="contact.html" class="py-2 hover:text-amber-200 transition">Contact</a>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="py-16 bg-gradient-to-r from-amber-900 to-amber-700 text-center text-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Upcoming Events</h1>
+            <p class="text-xl md:text-2xl text-amber-100 mb-6">Join us for unforgettable moments over coffee</p>
+            <div class="coffee-divider w-1/3 mx-auto"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Filter Tabs -->
+        <div class="mb-12">
+            <div class="filter-tabs flex flex-wrap justify-center gap-2 md:gap-4">
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white transition active" data-category="all">All Events</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white transition" data-category="music">Music Nights</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white transition" data-category="workshop">Workshops</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white transition" data-category="poetry">Poetry</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white transition" data-category="book">Book Clubs</button>
+            </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Event Card 1 -->
+            <div class="event-card rounded-lg overflow-hidden shadow-md relative" data-category="music">
+                <div class="category-tag bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Music Night
+                </div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <div class="p-6">
+                    <div class="flex items-center text-amber-700 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <span>June 15, 2023 | 7:00 PM</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Jazz & Coffee Evening</h3>
+                    <p class="text-gray-600 mb-4">Experience an intimate evening with local jazz musicians while enjoying our special coffee blends.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-800">$15</span>
+                        <button class="book-now-btn bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="event-card rounded-lg overflow-hidden shadow-md relative" data-category="workshop">
+                <div class="category-tag bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Workshop
+                </div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1445112098124-3e76dd67983c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <div class="p-6">
+                    <div class="flex items-center text-amber-700 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <span>June 18, 2023 | 10:00 AM</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Latte Art Masterclass</h3>
+                    <p class="text-gray-600 mb-4">Learn the secrets of creating beautiful latte art from our master barista. All materials included.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-800">$25</span>
+                        <button class="book-now-btn bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="event-card rounded-lg overflow-hidden shadow-md relative" data-category="poetry">
+                <div class="category-tag bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Poetry
+                </div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80');"></div>
+                <div class="p-6">
+                    <div class="flex items-center text-amber-700 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <span>June 20, 2023 | 6:30 PM</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Spoken Word Night</h3>
+                    <p class="text-gray-600 mb-4">An evening of powerful poetry and storytelling from local artists. Open mic slots available.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-800">$10</span>
+                        <button class="book-now-btn bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 4 -->
+            <div class="event-card rounded-lg overflow-hidden shadow-md relative" data-category="book">
+                <div class="category-tag bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Book Club
+                </div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <div class="p-6">
+                    <div class="flex items-center text-amber-700 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <span>June 22, 2023 | 5:00 PM</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Book Lovers' Meetup</h3>
+                    <p class="text-gray-600 mb-4">Discuss this month's selected book while enjoying complimentary coffee samples.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-800">Free</span>
+                        <button class="book-now-btn bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900">
+                            RSVP
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 5 -->
+            <div class="event-card rounded-lg overflow-hidden shadow-md relative" data-category="music">
+                <div class="category-tag bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Music Night
+                </div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <div class="p-6">
+                    <div class="flex items-center text-amber-700 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <span>June 25, 2023 | 8:00 PM</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Acoustic Sessions</h3>
+                    <p class="text-gray-600 mb-4">Local singer-songwriters perform in an intimate setting. Perfect for a relaxed evening.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-800">$12</span>
+                        <button class="book-now-btn bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 6 -->
+            <div class="event-card rounded-lg overflow-hidden shadow-md relative" data-category="workshop">
+                <div class="category-tag bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Workshop
+                </div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80');"></div>
+                <div class="p-6">
+                    <div class="flex items-center text-amber-700 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <span>June 28, 2023 | 3:00 PM</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Coffee Tasting 101</h3>
+                    <p class="text-gray-600 mb-4">Learn to identify different coffee profiles and brewing methods from our experts.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-800">$20</span>
+                        <button class="book-now-btn bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View All Button -->
+        <div class="text-center">
+            <button class="view-all-btn bg-transparent border-2 border-amber-800 text-amber-800 px-8 py-3 rounded-full font-semibold hover:bg-amber-800 hover:text-white">
+                View All Events <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-amber-900 text-amber-100 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-amber-200">The Brew Haven</h3>
+                    <p class="mb-4">A cozy café where coffee meets culture.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-amber-300">Home</a></li>
+                        <li><a href="menu.html" class="hover:text-amber-300">Menu</a></li>
+                        <li><a href="events.html" class="hover:text-amber-300">Events</a></li>
+                        <li><a href="gallery.html" class="hover:text-amber-300">Gallery</a></li>
+                        <li><a href="contact.html" class="hover:text-amber-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Hours</h4>
+                    <ul class="space-y-2">
+                        <li>Monday - Friday: 7am - 9pm</li>
+                        <li>Saturday: 8am - 10pm</li>
+                        <li>Sunday: 8am - 8pm</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Contact</h4>
+                    <address class="not-italic">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> 123 Coffee Lane, City</p>
+                        <p class="my-2"><i class="fas fa-phone mr-2"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope mr-2"></i> hello@brewhaven.com</p>
+                    </address>
+                </div>
+            </div>
+            <div class="border-t border-amber-800 mt-8 pt-8 text-center">
+                <p>&copy; 2023 The Brew Haven. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('button').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const eventCards = document.querySelectorAll('.event-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const category = button.dataset.category;
+                
+                // Filter events
+                eventCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // View all button functionality
+        document.querySelector('.view-all-btn').addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.filter-btn[data-category="all"]').classList.add('active');
+            
+            eventCards.forEach(card => {
+                card.style.display = 'block';
+            });
+            
+            // Scroll to top of events
+            window.scrollTo({
+                top: document.querySelector('.event-card').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

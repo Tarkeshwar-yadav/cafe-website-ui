@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | The Roasted Bean</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFDFA;
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #8B5A2B;
+            box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.2);
+        }
+        
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 90, 43, 0.1);
+        }
+        
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .responsive-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+    <!-- Navigation -->
+    <nav class="bg-amber-900 text-amber-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-mug-hot text-2xl text-amber-200"></i>
+                <span class="text-xl font-semibold">The Roasted Bean</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="about.html" class="hover:text-amber-200 transition">About</a>
+                <a href="gallery.html" class="hover:text-amber-200 transition">Gallery</a>
+                <a href="contact.html" class="text-amber-200 font-medium">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="md:hidden bg-amber-800 text-amber-50 hidden" id="mobileMenu">
+        <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+            <a href="index.html" class="py-2 hover:text-amber-200 transition">Home</a>
+            <a href="about.html" class="py-2 hover:text-amber-200 transition">About</a>
+            <a href="gallery.html" class="py-2 hover:text-amber-200 transition">Gallery</a>
+            <a href="contact.html" class="py-2 text-amber-200 font-medium">Contact</a>
+        </div>
+    </div>
+
+    <!-- Contact Hero Section -->
+    <section class="py-16 bg-amber-50">
+        <div class="container mx-auto px-4 text-center animate-fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold text-amber-900 mb-4">Get in Touch</h1>
+            <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">We'd love to hear from you. Drop us a message!</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="animate-fade-in delay-100">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-2xl font-bold text-amber-900 mb-6">Send us a message</h2>
+                        
+                        <!-- Success/Error Message (hidden by default) -->
+                        <div id="formMessage" class="hidden mb-6 p-4 rounded-lg"></div>
+                        
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" name="name" required 
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-amber-500 form-input" 
+                                       placeholder="John Doe">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-amber-500 form-input" 
+                                       placeholder="your@email.com">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" 
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-amber-500 form-input" 
+                                       placeholder="How can we help?">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" required 
+                                          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-amber-500 form-input" 
+                                          placeholder="Your message here..."></textarea>
+                            </div>
+                            
+                            <button type="submit" 
+                                    class="w-full bg-amber-800 hover:bg-amber-900 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="animate-fade-in delay-200">
+                    <div class="space-y-8">
+                        <!-- Contact Details Card -->
+                        <div class="bg-white rounded-xl shadow-lg p-8 contact-card">
+                            <h2 class="text-2xl font-bold text-amber-900 mb-6">Contact Information</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-map-marker-alt text-amber-800 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Our Location</h3>
+                                        <p class="text-gray-600">123 Coffee Lane, Brewtown<br>CA 90210, United States</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-phone-alt text-amber-800 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Phone Number</h3>
+                                        <a href="tel:+11234567890" class="text-gray-600 hover:text-amber-800 transition">+1 (123) 456-7890</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-envelope text-amber-800 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Email Address</h3>
+                                        <a href="mailto:hello@roastedbean.com" class="text-gray-600 hover:text-amber-800 transition">hello@roastedbean.com</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-clock text-amber-800 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Working Hours</h3>
+                                        <p class="text-gray-600">
+                                            Monday - Friday: 7am - 7pm<br>
+                                            Saturday: 8am - 8pm<br>
+                                            Sunday: 8am - 6pm
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        <div class="bg-white rounded-xl shadow-lg p-8 contact-card">
+                            <h2 class="text-2xl font-bold text-amber-900 mb-6">Follow Us</h2>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-amber-100 hover:bg-amber-200 text-amber-800 w-12 h-12 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-facebook-f text-xl"></i>
+                                </a>
+                                <a href="#" class="bg-amber-100 hover:bg-amber-200 text-amber-800 w-12 h-12 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                                <a href="#" class="bg-amber-100 hover:bg-amber-200 text-amber-800 w-12 h-12 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-twitter text-xl"></i>
+                                </a>
+                                <a href="#" class="bg-amber-100 hover:bg-amber-200 text-amber-800 w-12 h-12 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-linkedin-in text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="mt-16 animate-fade-in delay-300">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="map-container">
+                        <iframe class="responsive-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215373510328!2d-73.9878449240444!3d40.74844097138959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1689876422781!5m2!1sen!2sus" 
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-amber-900 text-amber-100 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-amber-200">The Roasted Bean</h3>
+                    <p class="mb-4">Where every cup tells a story.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl hover:text-amber-300"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-amber-300">Home</a></li>
+                        <li><a href="about.html" class="hover:text-amber-300">About</a></li>
+                        <li><a href="gallery.html" class="hover:text-amber-300">Gallery</a></li>
+                        <li><a href="contact.html" class="hover:text-amber-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Hours</h4>
+                    <ul class="space-y-2">
+                        <li>Monday - Friday: 7am - 7pm</li>
+                        <li>Saturday: 8am - 8pm</li>
+                        <li>Sunday: 8am - 6pm</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-amber-200">Contact</h4>
+                    <address class="not-italic">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> 123 Coffee Lane, City</p>
+                        <p class="my-2"><i class="fas fa-phone mr-2"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope mr-2"></i> hello@roastedbean.com</p>
+                    </address>
+                </div>
+            </div>
+            <div class="border-t border-amber-800 mt-8 pt-8 text-center">
+                <p>&copy; 2023 The Roasted Bean. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('button').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission (in a real app, you would use AJAX or similar)
+            formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+            formMessage.classList.add('bg-green-100', 'text-green-700');
+            formMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Your message has been sent successfully! We will get back to you soon.';
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+        
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        };
+
+        // Run once on page load
+        animateOnScroll();
+        
+        // Run on scroll
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
